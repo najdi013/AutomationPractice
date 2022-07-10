@@ -5,7 +5,7 @@ class MainPageLocators(object):
     """Main page locators. All of them should go to this class."""
 
     CONTACT_US = (By.ID, 'contact-link')
-    SIGN_IN = (By.CLASS_NAME, 'login')
+    SIGN_IN = (By.CSS_SELECTOR, 'a.login')
 
 
 class ContactUsPageLocators(object):

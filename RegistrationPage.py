@@ -1,9 +1,11 @@
 import unittest
-from selenium import webdriver
+from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver import Firefox
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from locators.auto_locators import SignInLocators as SIL
 from locators.auto_locators import MainPageLocators as MPL
+from selenium.webdriver.common.by import By
 
 
 class CreateAccount(unittest.TestCase):
@@ -11,8 +13,7 @@ class CreateAccount(unittest.TestCase):
 
     def setUp(self):
         """Go into Sign In website"""
-        self.driver = webdriver.Chrome(
-            'C:\Program Files (x86)\Chromedriver.exe')
+        self.driver = Firefox(executable_path=GeckoDriverManager().install())
         self.driver.get(
             'http://automationpractice.com/index.php?')
 
@@ -22,9 +23,9 @@ class CreateAccount(unittest.TestCase):
     def test_creat_account(self):
         """Input data & create account."""
         WebDriverWait(self.driver, 10).until(
-            EC.element_to_be_clickable(MPL.SIGN_IN)).click()
+            EC.presence_of_element_located(MPL.SIGN_IN)).click()
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located(SIL.EMAIL)).sendKeys('mail')
+            EC.presence_of_element_located(SIL.EMAIL))
 
 
 if __name__ == '__main__':
